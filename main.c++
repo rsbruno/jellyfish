@@ -21,7 +21,7 @@ int main()
     ifstream input("input.txt");
     string line;
 
-    stack *stck = new stack();
+    stack stck = *new stack();
     while (getline(input, line))
     {
 
@@ -36,23 +36,21 @@ int main()
                 while (line[i++] != '>' && v++ < SIZE_MAX_TAG)
                     ;
                 string tag = extract_string(line, found, i);
-                switch (stck->analyze_tag(tag))
+
+                switch (stck.what_to_do(tag))
                 {
                 case 1:
                     //pop
                     break;
                 case 3:
-                    stck->insert_tag(tag, stck);
+                    stck.push(tag);
                     break;
                 default:
                     cout << "\n";
                     break;
                 }
-                //stck->insert_tag(extract_string(line, found, i), stck);
             }
         }
     }
-    // stck->show_stack(stck);
-    // cout << stck->who_is_on_top(stck)->get_name();
-    //cout<<aux->get_name();
+    stck.print();
 }

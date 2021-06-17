@@ -3,20 +3,27 @@
 
 using namespace std;
 
+/*  ------------------------------------------------------------
+    *   Para todos os casos o uso do "this" se refere
+        a intância que chamou o método;
+    *   Salvo nos casos de "*this", onde este define um ponteiro
+        para onde está a instância na memória;
+    ------------------------------------------------------------
+*/
+
 class stack
 {
 private:
     string name;
     stack *next;
 
-    stack *search(string tag, stack *stck)
+    stack *search(string tag)
     {
-        if (stck->get_next()->get_name() == tag)
-        {
-            //cout<<"tag->"+tag+" - "+get_name()+"\n";
-            return stck;
-        }
-        return search(tag, stck->get_next());
+        if ((this) == NULL)
+            return NULL;
+        if ((this)->get_name() == tag)
+            return (this);
+        return (this)->get_next()->search(tag);
     }
 
     string replace_string(string strg, char remove, string replace = "")
@@ -43,42 +50,35 @@ public:
     void set_next(stack *nx) { next = nx; }
     stack *get_next() { return next; }
 
-    void insert_tag(string nm, stack *stck)
+    void push(string nm)
     {
-        if (stck->get_next() == NULL)
+        if ((this) == NULL)
+            return;
+        if ((this)->get_name() != "")
         {
-            if (stck->get_name() == "")
-                stck->set_name(nm);
-            else
-                stck->set_next(new stack(nm));
-            cout << "+ " + nm + "\n";
-            return;
+            (this)->set_next(new stack(*this));
+            (this)->set_name(nm);
         }
-        insert_tag(nm, stck->get_next());
+        else
+            (this)->set_name(nm);
     }
 
-    void show_stack(stack *stck)
+    void print()
     {
-        if (stck == NULL)
+        if ((this) == NULL)
             return;
-        cout << stck->get_name() + "\n";
-        show_stack(stck->get_next());
+        cout << (this)->get_name() + "\n";
+        (this)->get_next()->print();
     }
 
-    stack *who_is_on_top(stack *stck)
-    {
-        if (stck->get_next() == NULL)
-            return stck;
-        return who_is_on_top(stck->get_next());
-    }
+    stack *who_is_on_top() {return (this);}
 
-    int analyze_tag(string tag)
+    int what_to_do(string tag)
     {
         if (tag[0] == '/')
-            return 1; //pop
+            return 1; 
         if (tag[0] == '!')
-            return 2; // invalid
-        return 3;     //push
+            return 2; 
+        return 3; 
     }
-
 };
