@@ -40,7 +40,7 @@ int main()
                 switch (stck.what_to_do(tag))
                 {
                 case 1:
-                    //pop
+                    
                     break;
                 case 3:
                     stck.push(tag);
@@ -52,5 +52,6 @@ int main()
             }
         }
     }
+    stck.pop();
     stck.print();
 }

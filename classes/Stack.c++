@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <tuple>
 
 using namespace std;
 
@@ -17,13 +18,13 @@ private:
     string name;
     stack *next;
 
-    stack *search(string tag)
+    tuple<stack *, stack *> search(string tag, stack *dad = NULL)
     {
         if ((this) == NULL)
-            return NULL;
+            return {};
         if ((this)->get_name() == tag)
-            return (this);
-        return (this)->get_next()->search(tag);
+            return make_tuple((this), dad);
+        return (this)->get_next()->search(tag, (this));
     }
 
     string replace_string(string strg, char remove, string replace = "")
@@ -67,18 +68,57 @@ public:
     {
         if ((this) == NULL)
             return;
-        cout << (this)->get_name() + "\n";
+        cout << this->get_name() + '\n';
         (this)->get_next()->print();
     }
 
-    stack *who_is_on_top() {return (this);}
+    stack *who_is_on_top() { return (this); }
 
     int what_to_do(string tag)
     {
         if (tag[0] == '/')
-            return 1; 
+            return 1;
         if (tag[0] == '!')
-            return 2; 
-        return 3; 
+            return 2;
+        return 3;
+    }
+
+    bool remove(string tag)
+    {
+        stack *founded, *dad;
+        tie(founded, dad) = (*this).search(replace_string(tag, '/'));
+        if (founded == NULL)
+            return false;
+
+        if (dad == NULL)
+        {
+            if (founded->get_next() == NULL)
+            {
+                (*this).set_name("");
+                (*this).set_next(NULL);
+                return true;
+            }
+            (*this).set_name(founded->get_next()->get_name());
+            (*this).set_next(founded->get_next()->get_next());
+            return true;
+        }
+        dad->set_next(founded->get_next());
+        return true;
+    }
+
+    bool pop()
+    {
+        if ((this)->get_next() == NULL && (this)->get_name() == "")
+            return false;
+
+        if ((this)->get_next() == NULL)
+        {
+            (this)->set_next(NULL);
+            (this)->set_name("");
+            return true;
+        }
+        (this)->set_name((this->get_next()->get_name()));
+        (this)->set_next((this->get_next()->get_next()));
+        return true;
     }
 };
