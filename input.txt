@@ -9,5 +9,8 @@
 <body>
     <span>></span>
     <span><</span>
+    <div>
+        <img src="url"/>
+    </div>
 </body>
 </html>

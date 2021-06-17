@@ -2,11 +2,11 @@
 #include <fstream>
 #include <string>
 
+const int SIZE_MAX_TAG = 12;
+
 #include "./classes/Stack.c++"
 
 using namespace std;
-
-const int SIZE_MAX_TAG = 12;
 
 string extract_string(string line, int idx, int end)
 {
@@ -40,7 +40,7 @@ int main()
                 switch (stck.what_to_do(tag))
                 {
                 case 1:
-                    
+                    //stck.pop();
                     break;
                 case 3:
                     stck.push(tag);
@@ -52,6 +52,5 @@ int main()
             }
         }
     }
-    stck.pop();
     stck.print();
 }

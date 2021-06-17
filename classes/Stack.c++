@@ -38,6 +38,18 @@ private:
         return result;
     }
 
+    string return_tag(string tag)
+    {
+        string result = "";
+        int i = 0;
+        do
+        {
+            result += tag[i];
+        } while (tag[i++] != ' ');
+
+        return result;
+    }
+
 public:
     stack(string nm = "", stack *nx = NULL)
     {
@@ -79,7 +91,12 @@ public:
         if (tag[0] == '/')
             return 1;
         if (tag[0] == '!')
+            return 10;
+        if (tag.length() == SIZE_MAX_TAG - 1)
+        {
+            (*this).push(return_tag(tag));
             return 2;
+        }
         return 3;
     }
 
