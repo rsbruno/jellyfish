@@ -33,7 +33,7 @@ int main()
             {
                 found = i;
                 int v = 0;
-                while (line[i++] != '>' && v++ < SIZE_MAX_TAG)
+                while (line[i++] != '>' & v++ < SIZE_MAX_TAG)
                     ;
                 string tag = extract_string(line, found, i);
 
@@ -42,11 +42,16 @@ int main()
                 case 1:
                     //stck.pop();
                     break;
+                case 2:
+                    break;
                 case 3:
                     stck.push(tag);
                     break;
+
                 default:
-                    cout << "\n";
+                    cout << endl
+                         << "*\tTag ignorada -> " << tag << endl
+                         << endl;
                     break;
                 }
             }

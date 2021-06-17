@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <tuple>
-
+#include <iomanip>
 using namespace std;
 
 /*  ------------------------------------------------------------
@@ -45,7 +45,7 @@ private:
         do
         {
             result += tag[i];
-        } while (tag[i++] != ' ');
+        } while (tag[++i] != ' ');
 
         return result;
     }
@@ -79,8 +79,17 @@ public:
     void print()
     {
         if ((this) == NULL)
+        {
+            cout << endl
+                 << left << std::setw(10) << "Memória"
+                 << std::right << std::setw(16) << "Fecha?"
+                 << std::right << std::setw(9) << "Nome";
             return;
-        cout << this->get_name() + '\n';
+        }
+
+        cout << left << std::setw(18) << this
+             << std::right << std::setw(5) << "sim"
+             << std::right << std::setw(11) << this->get_name() << endl;
         (this)->get_next()->print();
     }
 

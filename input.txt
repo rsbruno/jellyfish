@@ -11,6 +11,7 @@
     <span><</span>
     <div>
         <img src="url"/>
+        <hr/>
     </div>
 </body>
 </html>
