@@ -2,6 +2,7 @@
 #include <string>
 #include <tuple>
 #include <iomanip>
+
 using namespace std;
 
 /*  ------------------------------------------------------------
@@ -47,7 +48,7 @@ private:
             result += tag[i];
         } while (tag[++i] != ' ');
 
-        return result;
+        return result += '/';
     }
 
 public:
@@ -76,22 +77,22 @@ public:
             (this)->set_name(nm);
     }
 
-    void print()
-    {
-        if ((this) == NULL)
-        {
-            cout << endl
-                 << left << std::setw(10) << "Memória"
-                 << std::right << std::setw(16) << "Fecha?"
-                 << std::right << std::setw(9) << "Nome";
-            return;
-        }
+    // void print()
+    // {
+    //     if ((this) == NULL)
+    //     {
+    //         cout << endl
+    //              << left << std::setw(10) << "Memória"
+    //              << std::right << std::setw(16) << "Fecha?"
+    //              << std::right << std::setw(9) << "Nome";
+    //         return;
+    //     }
 
-        cout << left << std::setw(18) << this
-             << std::right << std::setw(5) << "sim"
-             << std::right << std::setw(11) << this->get_name() << endl;
-        (this)->get_next()->print();
-    }
+    //     cout << left << std::setw(18) << this
+    //          << std::right << std::setw(5) << "sim"
+    //          << std::right << std::setw(11) << this->get_name() << endl;
+    //     (this)->get_next()->print();
+    // }
 
     stack *who_is_on_top() { return (this); }
 

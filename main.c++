@@ -2,9 +2,9 @@
 #include <fstream>
 #include <string>
 
-const int SIZE_MAX_TAG = 12;
+#include "./lib/constant.h"
 
-#include "./classes/Stack.c++"
+#include "./classes/stack.c++"
 
 using namespace std;
 
@@ -37,25 +37,27 @@ int main()
                     ;
                 string tag = extract_string(line, found, i);
 
-                switch (stck.what_to_do(tag))
-                {
-                case 1:
-                    //stck.pop();
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    stck.push(tag);
-                    break;
+                cout << tag << endl;
 
-                default:
-                    cout << endl
-                         << "*\tTag ignorada -> " << tag << endl
-                         << endl;
-                    break;
-                }
+                // switch (stck.what_to_do(tag))
+                // {
+                // case 1:
+                //     //stck.pop();
+                //     break;
+                // case 2:
+                //     break;
+                // case 3:
+                //     stck.push(tag);
+                //     break;
+
+                // default:
+                //     cout << endl
+                //          << "*\tTag ignorada -> " << tag << endl
+                //          << endl;
+                //     break;
+                // }
             }
         }
     }
-    stck.print();
+    //stck.print();
 }
