@@ -16,6 +16,22 @@ string extract_string(string line, int idx, int end)
     return result;
 }
 
+string return_tag(string str)
+{
+    string tg = "";
+    int array_size = sizeof(EXISTENT_TAGS) / sizeof(EXISTENT_TAGS[0]);
+
+    int i = 0;
+    while (str[i] != ' ' && str.length() > i)
+        tg += str[i++];
+
+    for (int i = 0; i < array_size; i++)
+        if (tg == EXISTENT_TAGS[i])
+            return tg;
+
+    return "";
+}
+
 int main()
 {
     ifstream input("input.txt");
@@ -37,7 +53,9 @@ int main()
                     ;
                 string tag = extract_string(line, found, i);
 
-                cout << tag << endl;
+                cout<<return_tag(tag);
+
+                //cout << tag << endl;
 
                 // switch (stck.what_to_do(tag))
                 // {
